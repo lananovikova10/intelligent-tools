@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rules SYSTEM "https://resources.jetbrains.com/writerside/1.0/redirection-rules.dtd">
+<rules>
+    <!-- format is as follows
+    <rule id="<unique id>">
+        <accepts>page.html</accepts>
+    </rule>
+    -->
+    <rule id="6f4f7be0">
+        <description>Created after removal of "Welcome to Writerside!" from Help Instance</description>
+        <accepts>Default-topic.html</accepts>
+    </rule>
+    <rule id="5a475538">
+        <description>Created after removal of "Analysis of Bus Factor" from Intelligent Tools</description>
+        <accepts>test.html</accepts>
+    </rule>
+</rules>

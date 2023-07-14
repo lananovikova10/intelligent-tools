@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<buildprofiles xsi:noNamespaceSchemaLocation="https://helpserver.labs.jb.gg/help/schemas/mvp/build-profiles.xsd"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <variables>
+        <primary-color>iris</primary-color>
+        <color-preset>vivid</color-preset>
+        <header-logo>jetbrains-square1.png</header-logo>
+    </variables>
+    <build-profile instance="sd"/>
+    <build-profile instance="hi">
+        <variables>
+            <noindex-content>true</noindex-content>
+        </variables>
+    </build-profile>
+</buildprofiles>

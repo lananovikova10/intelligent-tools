@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE instance-profile
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
+
+<instance-profile id="hi"
+                 name="Intelligent Tools"
+                 start-page="Default-topic.md">
+
+    <toc-element topic="Intelligent-Collaboration-Tools-Lab.topic">
+        <toc-element topic="Analysis-of-Bus-Factor.md"/>
+        <toc-element topic="Test1.md"/>
+    </toc-element>
+</instance-profile>
