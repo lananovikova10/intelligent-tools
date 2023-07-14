@@ -10,6 +10,10 @@
         <description>
             In addition to coding, software engineers spend just as much time exchanging information and collaborating with colleagues. Collaborative work in software engineering increasingly relies on specialized tools like communication engines, issue trackers, and code review platforms.
         </description>
+        <spotlight>
+            <a href="Test1.md" type="academy"></a>
+            <a href="Analysis-of-Bus-Factor.md" type="account"></a>
+        </spotlight>
 
         <!--    Add several topics that are most important for this section.    -->
         <primary>
