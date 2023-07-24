@@ -34,9 +34,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: help
-          path: |
-            artifacts/${{ env.ARTIFACT }}
-            sitemap.xml
+          path: artifacts/${{ env.ARTIFACT }}
           retention-days: 7
 
   deploy:
