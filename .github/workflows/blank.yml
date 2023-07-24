@@ -36,7 +36,7 @@ jobs:
           name: help
           path: |
             artifacts/${{ env.ARTIFACT }}
-            sitemap.xml # Add this line to include the sitemap.xml file
+            sitemap.xml
           retention-days: 7
 
   deploy:
