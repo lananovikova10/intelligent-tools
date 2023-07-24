@@ -9,7 +9,8 @@ The goal of this project at this stage is to evaluate the viability of bus facto
 ## Artifacts
 
 <tabs>
-<tab title="bus-factor-deploy">
+<tab>
+<title>✍️bus-factor-deploy</title>
 
 [Repository](https://github.com/JetBrains-Research/bus-factor-explorer) 🚀[Demo](https://bus-factor.labs.jb.gg/)
 
@@ -21,7 +22,8 @@ How it works:
 3. The report is available to view.
 
 </tab>
-<tab title="bus-factor-explorer">
+<tab title="🛠bus-factor-explorer">
+
 
 <a href="https://github.com/JetBrains-Research/bus-factor-explorer"><img src="gh.png" alt="GitHub logo" width="20"/> Repository</a>
 
@@ -41,7 +43,7 @@ How it works:
 </chapter>
 
 </tab>
-<tab title="ASE ‘23: Bus Factor Explorer">
+<tab title="🎓ASE ‘23: Bus Factor Explorer">
 <p><a href="https://www.overleaf.com/project/6464f27ee924874909b258cc">Overleaf</a></p>
 <p>ASE'23 Tool Demo Track (ASE'23 Demo)</p>
 <chapter title="Abstract">

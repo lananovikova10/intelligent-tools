@@ -34,7 +34,9 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: help
-          path: artifacts/${{ env.ARTIFACT }}
+          path: |
+            artifacts/${{ env.ARTIFACT }}
+            sitemap.xml # Add this line to include the sitemap.xml file
           retention-days: 7
 
   deploy:
@@ -53,6 +55,12 @@ jobs:
         uses: montudor/action-zip@v1
         with:
           args: unzip -qq ${{ env.ARTIFACT }} -d dir
+      - name: Deploy sitemap.xml to GitHub Pages
+        uses: actions/upload-pages-artifact@v1
+        with:
+            path: |
+              sitemap.xml # Add this line to deploy the sitemap.xml file
+              dir
       - name: Setup Pages
         uses: actions/configure-pages@v2
       - name: Upload artifact
