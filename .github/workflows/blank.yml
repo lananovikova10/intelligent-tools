@@ -24,12 +24,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Create artifacts directory
-        run: |
-          mkdir artifacts
-      - name: Copy sitemap.xml to artifacts directory
-        run: |
-          cp sitemap.xml artifacts/sitemap.xml
       - name: Build docs
         run: |
           export DISPLAY=:99
@@ -55,16 +49,14 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: help
-      - name: Unzip artifact
-        uses: montudor/action-zip@v1
-        with:
-          args: unzip -qq ${{ env.ARTIFACT }} -d dir
-      - name: Setup Pages
-        uses: actions/configure-pages@v2
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: dir
+      - name: Create deployment directory
+        run: |
+          mkdir deployment
+          cp ${{ env.ARTIFACT }} deployment/${{ env.ARTIFACT }}
+          cp sitemap.xml deployment/sitemap.xml
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
+        with:
+          branch: gh-pages
+          folder: deployment
