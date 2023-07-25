@@ -24,33 +24,20 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Create artifacts directory
-        run: |
-          mkdir artifacts
-      - name: Verify sitemap.xml existence
-        run: |
-          if [ -f sitemap.xml ]; then
-            echo "sitemap.xml found."
-          else
-            echo "sitemap.xml not found."
-            exit 1
-          fi
-      - name: Copy sitemap.xml and artifact to artifacts directory
-        run: |
-          cp sitemap.xml artifacts/sitemap.xml
-          cp ${{ github.workspace }}/${{ env.ARTIFACT }} artifacts/${{ env.ARTIFACT }}
-      - name: Build docs
+      - name: Build docs and include sitemap.xml
         run: |
           export DISPLAY=:99
           Xvfb :99 &
           /opt/builder/bin/idea.sh helpbuilderinspect -source-dir . -product $PRODUCT --runner github -output-dir artifacts/ || true
-          test -e artifacts/${{ env.ARTIFACT }} && echo $ARTIFACT exists
+          test -e artifacts/$ARTIFACT && echo $ARTIFACT exists
+          cd artifacts
+          zip -r $ARTIFACT sitemap.xml
         working-directory: ${{ github.workspace }}
-      - name: Upload documentation
+      - name: Upload modified documentation artifact
         uses: actions/upload-artifact@v3
         with:
           name: help
-          path: artifacts
+          path: artifacts/${{ env.ARTIFACT }}
           retention-days: 7
 
   deploy:
