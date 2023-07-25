@@ -24,11 +24,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      - name: Verify sitemap.xml existence
+        run: |
+          if [ -f sitemap.xml ]; then
+            echo "sitemap.xml found."
+          else
+            echo "sitemap.xml not found."
+            exit 1
+          fi
       - name: Copy sitemap.xml and artifact to artifacts directory
         run: |
-          cp ${{ github.workspace }}/sitemap.xml ${{ github.workspace }}/artifacts/sitemap.xml
-          cp ${{ env.ARTIFACT }} ${{ github.workspace }}/artifacts/${{ env.ARTIFACT }}
-        working-directory: ${{ github.workspace }}
+          cp sitemap.xml artifacts/sitemap.xml
+          cp ${{ env.ARTIFACT }} artifacts/${{ env.ARTIFACT }}
       - name: Build docs
         run: |
           export DISPLAY=:99
