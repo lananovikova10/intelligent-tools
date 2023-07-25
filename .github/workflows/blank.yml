@@ -24,6 +24,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      - name: Create artifacts directory
+        run: |
+          mkdir artifacts
       - name: Verify sitemap.xml existence
         run: |
           if [ -f sitemap.xml ]; then
