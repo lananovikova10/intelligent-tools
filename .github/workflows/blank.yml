@@ -18,12 +18,15 @@ env:
 jobs:
   build-job:
     runs-on: ubuntu-latest
-    container: registry.jetbrains.team/p/writerside/builder/writerside-builder:2.1.1471-p3848
     outputs:
       artifact: ${{ steps.generate-artifact.outputs.artifact }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      - name: Install zip
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y zip
       - name: Build docs and include sitemap.xml
         run: |
           export DISPLAY=:99
@@ -57,11 +60,4 @@ jobs:
         with:
           args: unzip -qq ${{ env.ARTIFACT }} -d dir
       - name: Setup Pages
-        uses: actions/configure-pages@v2
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: dir
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
+        uses
