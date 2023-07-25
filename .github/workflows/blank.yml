@@ -26,14 +26,16 @@ jobs:
         uses: actions/checkout@v3
       - name: Copy sitemap.xml and artifact to artifacts directory
         run: |
-          cp sitemap.xml artifacts/sitemap.xml
-          cp ${{ env.ARTIFACT }} artifacts/${{ env.ARTIFACT }}
+          cp ${{ github.workspace }}/sitemap.xml ${{ github.workspace }}/artifacts/sitemap.xml
+          cp ${{ env.ARTIFACT }} ${{ github.workspace }}/artifacts/${{ env.ARTIFACT }}
+        working-directory: ${{ github.workspace }}
       - name: Build docs
         run: |
           export DISPLAY=:99
           Xvfb :99 &
           /opt/builder/bin/idea.sh helpbuilderinspect -source-dir . -product $PRODUCT --runner github -output-dir artifacts/ || true
           test -e artifacts/$ARTIFACT && echo $ARTIFACT exists
+        working-directory: ${{ github.workspace }}
       - name: Upload documentation
         uses: actions/upload-artifact@v3
         with:
