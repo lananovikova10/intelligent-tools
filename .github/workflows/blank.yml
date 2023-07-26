@@ -50,16 +50,14 @@ jobs:
           apt-get update
           apt-get install -y zip
           mkdir -p artifacts
-      - name: Build docs and include sitemap.xml
+      - name: Build docs
         run: |
           export DISPLAY=:99
           Xvfb :99 &
           /opt/builder/bin/idea.sh helpbuilderinspect -source-dir . -product $PRODUCT --runner github -output-dir artifacts/ || true
           test -e artifacts/$ARTIFACT && echo $ARTIFACT exists
-          # Move sitemap.xml to the build output directory
-          mv artifacts/sitemap.xml .
-          # Add the sitemap.xml to the existing webHelpHI2-all.zip in the root
-          zip -u $ARTIFACT sitemap.xml
+          # Add the sitemap.xml to the existing webHelpHI2-all.zip using the full path
+          zip -u artifacts/$ARTIFACT ${{ needs.sitemap_job.outputs.sitemap-path }}
         working-directory: ${{ github.workspace }}
       - name: Upload modified documentation artifact
         uses: actions/upload-artifact@v3
