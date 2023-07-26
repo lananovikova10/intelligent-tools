@@ -57,7 +57,7 @@ jobs:
           test -e artifacts/$ARTIFACT && echo $ARTIFACT exists
           cd artifacts
           # Ensure the sitemap.xml is in the correct directory
-          mv ../sitemap.xml .
+          # mv ../sitemap.xml .
           # Add the sitemap.xml to the existing webHelpHI2-all.zip
           zip -u $ARTIFACT sitemap.xml
         working-directory: ${{ github.workspace }}
