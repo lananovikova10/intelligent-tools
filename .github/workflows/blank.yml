@@ -57,13 +57,13 @@ jobs:
           zip -u artifacts/$ARTIFACT ${{ needs.sitemap_job.outputs.sitemap-path }}
           # Add debug output to check the files in the artifacts directory after adding the sitemap
           ls -la artifacts
-      working-directory: ${{ github.workspace }}
-        - name: Upload modified documentation artifact
-          uses: actions/upload-artifact@v3
-          with:
-            name: help
-            path: artifacts/${{ env.ARTIFACT }}
-            retention-days: 7
+        working-directory: ${{ github.workspace }}
+      - name: Upload modified documentation artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: help
+          path: artifacts/${{ env.ARTIFACT }}
+          retention-days: 7
 
   deploy:
     environment:
