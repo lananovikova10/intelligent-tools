@@ -26,13 +26,13 @@ jobs:
         uses: actions/checkout@v3
       - name: Prepare for build
         run: |
-          export DISPLAY=:99
-          Xvfb :99 &
           apt-get update
           apt-get install -y zip
           mkdir -p artifacts
       - name: Build docs and include sitemap.xml
         run: |
+          export DISPLAY=:99
+          Xvfb :99 &
           /opt/builder/bin/idea.sh helpbuilderinspect -source-dir . -product $PRODUCT --runner github -output-dir artifacts/ || true
           test -e artifacts/$ARTIFACT && echo $ARTIFACT exists
           cp sitemap.xml artifacts/sitemap.xml
