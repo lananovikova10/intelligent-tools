@@ -56,8 +56,10 @@ jobs:
           /opt/builder/bin/idea.sh helpbuilderinspect -source-dir . -product $PRODUCT --runner github -output-dir artifacts/ || true
           test -e artifacts/$ARTIFACT && echo $ARTIFACT exists
           cd artifacts
-          # Add the sitemap.xml to the existing webHelpHI2-all.zip using the full path
-          zip -u $ARTIFACT sitemap.xml
+          # Move sitemap.xml to the root of the build output directory
+          mv sitemap.xml ../
+          # Add the sitemap.xml to the existing webHelpHI2-all.zip in the root
+          zip -u $ARTIFACT ../sitemap.xml
         working-directory: ${{ github.workspace }}
       - name: Upload modified documentation artifact
         uses: actions/upload-artifact@v3
