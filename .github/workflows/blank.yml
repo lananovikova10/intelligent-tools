@@ -53,10 +53,10 @@ jobs:
           test -e artifacts/$ARTIFACT && echo $ARTIFACT exists
           # Add the sitemap.xml to the existing webHelpHI2-all.zip using the full path
           zip -u artifacts/$ARTIFACT ${{ needs.sitemap_job.outputs.sitemap-path }}
-      working-directory: ${{ github.workspace }}
-        - name: Upload modified documentation artifact
-          uses: actions/upload-artifact@v3
-          with:
+        working-directory: ${{ github.workspace }}
+      - name: Upload modified documentation artifact
+        uses: actions/upload-artifact@v3
+        with:
             name: help
             path: artifacts/${{ env.ARTIFACT }}
             retention-days: 7
