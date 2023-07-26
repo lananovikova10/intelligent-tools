@@ -56,8 +56,15 @@ jobs:
           Xvfb :99 &
           /opt/builder/bin/idea.sh helpbuilderinspect -source-dir . -product $PRODUCT --runner github -output-dir artifacts/ || true
           test -e artifacts/$ARTIFACT && echo $ARTIFACT exists
-          # Add the sitemap.xml to the existing webHelpHI2-all.zip using the full path
-          zip -u artifacts/$ARTIFACT ${{ needs.sitemap_job.outputs.sitemap-path }}
+        working-directory: ${{ github.workspace }}
+      - name: Move sitemap.xml to artifacts directory
+        run: |
+          mv ${{ needs.sitemap_job.outputs.sitemap-path }} artifacts/sitemap.xml
+        working-directory: ${{ github.workspace }}
+      - name: Add sitemap.xml to webHelpHI2-all.zip
+        run: |
+          cd artifacts
+          zip -u $ARTIFACT sitemap.xml
         working-directory: ${{ github.workspace }}
       - name: Upload modified documentation artifact
         uses: actions/upload-artifact@v3
