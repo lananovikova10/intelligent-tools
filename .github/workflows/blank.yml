@@ -16,6 +16,26 @@ env:
   ARTIFACT: webHelpHI2-all.zip
 
 jobs:
+  sitemap_job:
+    runs-on: ubuntu-latest
+    name: Generate a sitemap
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Generate the sitemap
+        id: sitemap
+        uses: cicirello/generate-sitemap@v1
+        with:
+          base-url-path: https://lananovikova10.github.io/intelligent-tools/
+
+      - name: Copy sitemap to artifacts directory
+        run: |
+          mkdir -p artifacts
+          cp ${{ steps.sitemap.outputs.sitemap-path }} artifacts/sitemap.xml
+
   build-job:
     runs-on: ubuntu-latest
     container: registry.jetbrains.team/p/writerside/builder/writerside-builder:2.1.1471-p3848
@@ -35,7 +55,6 @@ jobs:
           Xvfb :99 &
           /opt/builder/bin/idea.sh helpbuilderinspect -source-dir . -product $PRODUCT --runner github -output-dir artifacts/ || true
           test -e artifacts/$ARTIFACT && echo $ARTIFACT exists
-          cp sitemap.xml artifacts/sitemap.xml
           cd artifacts
           zip -r $ARTIFACT sitemap.xml
         working-directory: ${{ github.workspace }}
