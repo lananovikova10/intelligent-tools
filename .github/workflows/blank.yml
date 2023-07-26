@@ -48,6 +48,9 @@ jobs:
         run: |
           apt-get update
           apt-get install -y zip
+          mkdir -p artifacts
+          # Remove the webHelpHI2-all.zip file if it exists
+          rm -f artifacts/webHelpHI2-all.zip
       - name: Build docs and include sitemap.xml
         run: |
           export DISPLAY=:99
