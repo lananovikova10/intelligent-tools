@@ -1,88 +1,75 @@
-name: Build docs
+name: Build documentation
 
 on:
   push:
+    # To trigger the workflow once you push to the `main` branch
+    # Replace `main` with your branch’s name
     branches: ["main"]
-  # Specify to run a workflow manually from the Actions tab on GitHub.
+  # Specify to run a workflow manually from the Actions tab on GitHub
   workflow_dispatch:
 
-# Gives the workflow permissions to clone the repo and create a page deployment
 permissions:
   id-token: write
   pages: write
 
 env:
-  PRODUCT: Writerside/hi
+  # Name of module and id separated by a slash
+  INSTANCE: Writerside/hi
+  # Replace XX with the ID of the instance in capital letters
   ARTIFACT: webHelpHI2-all.zip
+  # Docker image version
+  DOCKER_VERSION: 2.1.1479-p3869
 
 jobs:
-  sitemap_job:
+  build:
     runs-on: ubuntu-latest
-    name: Generate a sitemap
-    steps:
-      - name: Checkout the repo
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
 
-      - name: Generate the sitemap
-        id: sitemap
-        uses: cicirello/generate-sitemap@v1
-        with:
-          base-url-path: https://lananovikova10.github.io/intelligent-tools/
-
-  build-job:
-    runs-on: ubuntu-latest
-    container: registry.jetbrains.team/p/writerside/builder/writerside-builder:2.1.1471-p3848
-    needs: sitemap_job  # Ensure sitemap_job is executed before this job
-    outputs:
-      artifact: ${{ steps.generate-artifact.outputs.artifact }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Prepare for build
-        run: |
-          apt-get update
-          apt-get install -y p7zip-full
-          mkdir -p artifacts
-      - name: Build docs
-        run: |
-          export DISPLAY=:99
-          Xvfb :99 &
-          /opt/builder/bin/idea.sh helpbuilderinspect -source-dir . -product $PRODUCT --runner github -output-dir artifacts/ || true
-          test -e artifacts/$ARTIFACT && echo $ARTIFACT exists
-          # Add the sitemap.xml to the existing webHelpHI2-all.zip using the full path
-          7z u artifacts/$ARTIFACT ${{ needs.sitemap_job.outputs.sitemap-path }}
-        working-directory: ${{ github.workspace }}
-      - name: Upload modified documentation artifact
+
+      - name: Build Writerside docs using Docker
+        uses: JetBrains/writerside-github-action@v4
+        with:
+          instance: ${{ env.INSTANCE }}
+          artifact: ${{ env.ARTIFACT }}
+          docker-version: ${{ env.DOCKER_VERSION }}
+
+      - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: help
-          path: artifacts/${{ env.ARTIFACT }}
+          name: docs
+          path: |
+            artifacts/${{ env.ARTIFACT }}
           retention-days: 7
 
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    # Requires the build-job results
-    needs: build-job
+    # Requires test job results
+    needs: build
     runs-on: ubuntu-latest
+
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
-          name: help
+          name: docs
+
       - name: Unzip artifact
         uses: montudor/action-zip@v1
         with:
           args: unzip -qq ${{ env.ARTIFACT }} -d dir
+
       - name: Setup Pages
         uses: actions/configure-pages@v2
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
           path: dir
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
