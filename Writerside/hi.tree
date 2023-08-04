@@ -6,6 +6,7 @@
                  name="Intelligent Tools"
                  start-page="Intelligent-Collaboration-Tools-Lab.topic">
 
+    <toc-element topic="API-Reference.topic"/>
     <toc-element topic="Intelligent-Collaboration-Tools-Lab.topic">
         <toc-element topic="Analysis-of-Bus-Factor.md"/>
         <toc-element topic="Test1.md"/>

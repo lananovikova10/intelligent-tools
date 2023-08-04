@@ -1,10 +1,29 @@
 # Analysis of Bus Factor
 
-Bus factor is a metric that denotes the resilience of the project to sudden engineer turnover. Bus factor is the minimal number of engineers that have to be "hit by a bus", or leave the project, for it to stall.
+Bus factor is a metric that denotes the resilience of the project to sudden engineer 
+turnover. Bus factor is the minimal number of engineers that have to be "hit by a bus", 
+or leave the project, for it to stall.
 
-By analyzing the history of code contributions, we can identify the files and subsystems at risk of stalling in the event of developer turnover. We believe that bus factor analysis is a good starting point to work on enabling the collaboration tools to use version control history data to assist with organization of teamwork.
+By analyzing the history of code contributions, we can identify the files and subsystems at risk of 
+stalling in the event of developer turnover. We believe that bus factor analysis is a good starting 
+point to work on enabling the collaboration tools to use version control history data to assist with 
+organization of teamwork.
 
-The goal of this project at this stage is to evaluate the viability of bus factor analysis as a user-facing feature in one of JetBrains projects.
+<snippet id="ghgh">
+
+## chapter title 
+
+Paragraph.
+
+```python
+hello
+```
+
+Pargrapg
+</snippet>
+
+The goal of this project at this stage is to evaluate the viability of bus factor analysis as a user-facing feature 
+in one of JetBrains projects.
 
 ## Artifacts
 

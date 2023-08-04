@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       title="How to do things" id="How-to">
+
+    <p>
+        The SWAPI (Star Wars API) provides a wealth of data about the Star Wars universe to build applications.
+        With the SWAPI, developers can access detailed Star Wars related data about people, planets, films, species and much more. From web and mobile applications to data analysis, the possibilities are limitless.
+    </p>
+<!--    <apidoc openapi-path="../openapi-planets.yaml" endpoint="/planets/{planetId}" method="get"/>-->
+
+</topic>
