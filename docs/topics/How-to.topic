@@ -10,5 +10,9 @@
         With the SWAPI, developers can access detailed Star Wars related data about people, planets, films, species and much more. From web and mobile applications to data analysis, the possibilities are limitless.
     </p>
 <!--    <apidoc openapi-path="../openapi-planets.yaml" endpoint="/planets/{planetId}" method="get"/>-->
-
+    <deflist collapsible="true">
+        <def title="title" caps="upper">
+            <p>ffff</p>
+        </def>
+    </deflist>
 </topic>
